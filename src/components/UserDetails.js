@@ -1,56 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 
-function UserDetails() {
+const items = [
+  { id: '1', name: 'Item 1', description: 'This is the description for Item 1' },
+  { id: '2', name: 'Item 2', description: 'This is the description for Item 2' },
+  { id: '3', name: 'Item 3', description: 'This is the description for Item 3' },
+];
+
+const UserDetail = () => {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const item = items.find((item) => item.id === id);
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          setLoading(false);
-        });
-    }, 1000);
-  }, [id]);
-
-  if (loading) {
-    return <p>Loading...</p>;
+  if (!item) {
+    return <h2>Item not found</h2>;
   }
 
   return (
     <div>
-      {user ? (
-        <>
-          <h1>User Details</h1>
-          <p>
-            <strong>Username:</strong> {user.username}
-          </p>
-          <p>
-            <strong>Name:</strong> {user.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Phone:</strong> {user.phone}
-          </p>
-          <p>
-            <strong>Website:</strong> {user.website}
-          </p>
-        </>
-      ) : (
-        <p>User not found.</p>
-      )}
+      <h2>{item.name}</h2>
+      <p>{item.description}</p>
+      <Link to="/">Back to List</Link>
     </div>
   );
-}
+};
 
-export default UserDetails;
+export default UserDetail;
