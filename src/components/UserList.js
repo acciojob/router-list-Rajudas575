@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const items = [
+  { id: '1', name: 'Item 1', description: 'This is the description for Item 1' },
+  { id: '2', name: 'Item 2', description: 'This is the description for Item 2' },
+  { id: '3', name: 'Item 3', description: 'This is the description for Item 3' },
+];
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => setUsers(data))
-      .then((error) => console.error("Error fetching users:", error));
-  }, []);
   return (
     <div>
-      <h1>User List</h1>
+      <h2>Item List</h2>
       <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            <Link to={`/users/${user.id}`}>{user.name}</Link>
+        {items.map((item) => (
+          <li key={item.id}>
+            <Link to={`/item/${item.id}`}>{item.name}</Link>
           </li>
         ))}
       </ul>
