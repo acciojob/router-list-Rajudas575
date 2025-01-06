@@ -5,12 +5,16 @@ import ItemDetail from "./ItemDetail";
 
 const App = () => {
   return (
-    <Router>
+    <div>
+        {/* Do not remove the main div */}
+     <Router>
       <Routes>
         <Route path="/" element={<ItemList />} />
         <Route path="/items/:id" element={<ItemDetail />} />
       </Routes>
     </Router>
+    </div>
+   
   );
 };
 
